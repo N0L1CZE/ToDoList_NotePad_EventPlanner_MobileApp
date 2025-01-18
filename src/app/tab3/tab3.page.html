@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Event Manager</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="ion-padding">
+    <h2>Vaše události</h2>
+
+    <!-- Formulář pro přidání nové události -->
+    <ion-item>
+      <ion-label position="floating">Název události</ion-label>
+      <ion-input [(ngModel)]="newEvent.title" placeholder="Zadejte název"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Datum</ion-label>
+      <ion-datetime [(ngModel)]="newEvent.date" placeholder="Vyberte datum"></ion-datetime>
+    </ion-item>
+    <ion-button expand="block" (click)="addEvent()" color="primary">
+      Přidat událost
+    </ion-button>
+
+    <!-- Seznam událostí -->
+    <ion-list>
+      <ion-item *ngFor="let event of events; let i = index">
+        <ion-label>
+          <h2>{{ event.title }}</h2>
+          <p>{{ event.date }}</p>
+        </ion-label>
+        <ion-buttons slot="end">
+          <ion-button color="tertiary" (click)="editEvent(i)">Upravit</ion-button>
+          <ion-button color="danger" (click)="deleteEvent(i)">Smazat</ion-button>
+        </ion-buttons>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>

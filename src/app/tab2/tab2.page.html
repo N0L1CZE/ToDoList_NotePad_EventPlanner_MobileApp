@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Zápisník
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- Vyhledávací pole pro filtrování karet -->
+  <ion-item>
+    <ion-label position="floating">Hledat</ion-label>
+    <ion-input [(ngModel)]="searchText" (ionInput)="filterCards()" placeholder="Hledejte podle názvu"></ion-input>
+  </ion-item>
+
+  <!-- Formulář pro přidání nebo úpravu karty -->
+  <ion-item>
+    <ion-label position="floating">Název</ion-label>
+    <ion-input [(ngModel)]="newCard.title"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Obsah</ion-label>
+    <ion-textarea [(ngModel)]="newCard.content"></ion-textarea>
+  </ion-item>
+
+  <ion-button expand="full" (click)="addCard()">Přidat / Upravit kartu</ion-button>
+
+  <ion-button expand="full" color="danger" (click)="clearAll()">Vymazat všechny karty</ion-button>
+
+  <!-- Zobrazení filtrovaných karet -->
+  <ion-list>
+    <ion-item *ngFor="let card of filteredCards">
+      <ion-label>
+        <h2>{{ card.title }}</h2>
+        <p>{{ card.content }}</p>
+      </ion-label>
+      <ion-button slot="end" (click)="editCard(card)" color="primary">Upravit</ion-button>
+      <ion-button slot="end" (click)="deleteCard(card.id)" color="danger">Smazat</ion-button>
+    </ion-item>
+  </ion-list>
+</ion-content>
